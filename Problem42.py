@@ -17,7 +17,6 @@ for word in words:
 
 	if word_value in triangles:
 		are += 1
-		print word
 	else:
 		are_not += 1
 

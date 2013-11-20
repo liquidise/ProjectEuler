@@ -36,6 +36,17 @@ def isPrime( num ):
 	return True
 
 
+def getNextPrime( number ):
+	if number % 2 == 0:
+		number += 1
+	else:
+		number += 2
+
+	while not isPrime( number ):
+		number += 2
+
+	return number
+
 def isPandigital( number ):
 	str_number = str( number )
 	digits = [ '1', '2', '3', '4', '5', '6', '7', '8', '9' ]
@@ -57,3 +68,28 @@ def gcd( a, b ):
 		else:
 			b -= a
 	return a
+
+def factor( number ):
+	original_number = number
+
+	index = 0
+	divsior = 2
+	factors = []
+
+	if isPrime( number ):
+		return [ number ]
+
+	while divsior <= number:
+		if index >= len( firstPrimes ):
+			divsior = getNextPrime( divsior )
+			firstPrimes.append( divsior )
+		else:
+			divsior = firstPrimes [ index ]
+
+		if number % divsior == 0:
+			number /= divsior
+			factors.append( divsior )
+		else:
+			index += 1
+
+	return factors
