@@ -10,10 +10,10 @@ for i in range(1, 1000):
         intRoot = int( root )
         if root == intRoot:
             total = i + k + intRoot
-            
+
             if total > 1000:
                 continue
-            
+
             if not total in sums:
                 sums[total] = 0
 
@@ -24,7 +24,7 @@ for i in sums.keys():
     if most['count'] < sums[i]:
         most['count'] = sums[i]
         most['p'] = i
-    
+
     print "p = " , i, "  count = ", sums[i]
 
 print "Most: ", most
