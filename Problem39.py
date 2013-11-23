@@ -1,30 +1,23 @@
 import math
 
-sums = {};
+sums = {}
+most = (0, 0)
 for i in range(1, 1000):
-    for k in range(1, 1000):
-        if i <= k:
-            continue
+	for k in range(1, i):
+		root = math.sqrt( (i * i) + (k * k) )
+		intRoot = int( root )
+		if root == intRoot:
+			total = i + k + intRoot
 
-        root = math.sqrt( (i * i) + (k * k) )
-        intRoot = int( root )
-        if root == intRoot:
-            total = i + k + intRoot
+			if total > 1000:
+				continue
 
-            if total > 1000:
-                continue
+			try:
+				sums[ total ] += 1
+			except Exception as e:
+				sums[ total ] = 1
 
-            if not total in sums:
-                sums[total] = 0
+			if most[0] < sums[ total ]:
+				most = ( sums[total], total )
 
-            sums[total] += 1
-
-most = {"count": 0, "p": 0}
-for i in sums.keys():
-    if most['count'] < sums[i]:
-        most['count'] = sums[i]
-        most['p'] = i
-
-    print "p = " , i, "  count = ", sums[i]
-
-print "Most: ", most
+print most
