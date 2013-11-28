@@ -12,9 +12,9 @@ for i in range(1, 1000):
 			if total > 1000:
 				continue
 
-			try:
+			if total in sums:
 				sums[ total ] += 1
-			except Exception as e:
+			else:
 				sums[ total ] = 1
 
 			if most[0] < sums[ total ]:

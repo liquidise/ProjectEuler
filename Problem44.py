@@ -20,21 +20,15 @@ for i in range( 1, 2500 ):
 
 step_size = 1000
 while step_size < 2000:
-    print "Step Size: " + str( step_size )
-
     for i in range( 0, len(numbers) - step_size ):
 
         number_sum = numbers[i] + numbers[i + step_size]
-        if isPentagonal( number_sum ):
-            print "  +", numbers[i], numbers[i + step_size]
-        else:
+        if not isPentagonal( number_sum ):
             continue
 
         diff = numbers[i + step_size] - numbers[i]
-        if isPentagonal( diff ):
-            print "  -", numbers[i], numbers[i + step_size]
 
-        if isPentagonal( diff ) and isPentagonal( number_sum ):
+        if isPentagonal( diff ):
             print "  ", "FOUND", numbers[i], numbers[i + step_size]
             exit()
 
