@@ -70,8 +70,6 @@ def gcd( a, b ):
 	return a
 
 def factor( number ):
-	original_number = number
-
 	index = 0
 	divsior = 2
 	factors = []
