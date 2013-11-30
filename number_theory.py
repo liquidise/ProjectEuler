@@ -29,9 +29,11 @@ def isPrime( num ):
 			return False
 
 	# Check remaining odd numbers starting with 1009 (first prime > 1000)
-	for i in range( 1009, root, 2 ):
-		if i > root or num % i == 0:
-			return False
+	for i in range( firstPrimes[-1] + 2, root, 2 ):
+		if isPrime( i ):
+			firstPrimes.append( i )
+			if i > root or num % i == 0:
+				return False
 
 	return True
 
@@ -71,22 +73,22 @@ def gcd( a, b ):
 
 def factor( number ):
 	index = 0
-	divsior = 2
+	divisor = 2
 	factors = []
 
 	if isPrime( number ):
 		return [ number ]
 
-	while divsior <= number:
+	while divisor <= number:
 		if index >= len( firstPrimes ):
-			divsior = getNextPrime( divsior )
-			firstPrimes.append( divsior )
+			divisor = getNextPrime( divisor )
+			firstPrimes.append( divisor )
 		else:
-			divsior = firstPrimes [ index ]
+			divisor = firstPrimes [ index ]
 
-		if number % divsior == 0:
-			number /= divsior
-			factors.append( divsior )
+		if number % divisor == 0:
+			number /= divisor
+			factors.append( divisor )
 		else:
 			index += 1
 
