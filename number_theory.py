@@ -63,6 +63,25 @@ def isPandigital( number ):
 	return True
 
 
+def totient( number ):
+	possibilities = set( range( 1, number ) )
+	not_relatively_prime = set()
+
+	for i in possibilities:
+		if i in not_relatively_prime or i == 1:
+			continue
+
+		if gcd( number, i ) > 1:
+			k = 1
+			product = k * i
+			while product < number:
+				if product in possibilities:
+					not_relatively_prime.add( product )
+				k += 1
+				product = k * i
+
+	return len( possibilities - not_relatively_prime )
+
 def gcd( a, b ):
 	while a != b:
 		if a > b:
