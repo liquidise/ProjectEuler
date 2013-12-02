@@ -15,5 +15,4 @@ def num_ways( number, highest_currency ):
 currencies = [ 1, 2, 5, 10, 20, 50, 100, 200 ]
 currencies.reverse()
 
-
 print num_ways( 200, 200 )
