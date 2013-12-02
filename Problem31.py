@@ -7,8 +7,7 @@ def num_ways( number, highest_currency ):
 		if i > number or i > highest_currency:
 			continue
 
-		this_ways = num_ways( number - i, i )
-		ways += this_ways
+		ways += num_ways( number - i, i )
 
 	return ways
 
