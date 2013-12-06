@@ -1,4 +1,5 @@
 import math
+from operator import mul
 
 firstPrimes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
 			47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
@@ -62,25 +63,13 @@ def isPandigital( number ):
 
 	return True
 
-
 def totient( number ):
-	possibilities = set( range( 1, number ) )
-	not_relatively_prime = set()
+	factors = exp_factor( number )
 
-	for i in possibilities:
-		if i in not_relatively_prime or i == 1:
-			continue
-
-		if gcd( number, i ) > 1:
-			k = 1
-			product = k * i
-			while product < number:
-				if product in possibilities:
-					not_relatively_prime.add( product )
-				k += 1
-				product = k * i
-
-	return len( possibilities - not_relatively_prime )
+	product = 1
+	for p, exp in factors:
+		product *= (p - 1) * p ** (exp - 1)
+	return product
 
 def gcd( a, b ):
 	while a != b:
@@ -89,6 +78,37 @@ def gcd( a, b ):
 		else:
 			b -= a
 	return a
+
+def exp_factor( number ):
+	index = 0
+	divisor = 2
+	factors = {}
+
+	if isPrime( number ):
+		return [ (number, 1) ]
+
+	while divisor <= number:
+		if index >= len( firstPrimes ):
+			divisor = getNextPrime( divisor )
+			firstPrimes.append( divisor )
+		else:
+			divisor = firstPrimes [ index ]
+
+		if number % divisor == 0:
+			number /= divisor
+			if divisor in factors:
+				factors[ divisor ] += 1
+			else:
+				factors[ divisor ] = 1
+		else:
+			index += 1
+
+	array = []
+	for num in factors:
+		array.append( (num, factors[num]) )
+
+	return array
+
 
 def factor( number ):
 	index = 0
