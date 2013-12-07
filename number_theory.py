@@ -87,7 +87,9 @@ def exp_factor( number ):
 	if isPrime( number ):
 		return [ (number, 1) ]
 
-	while divisor <= number:
+	factor_cap = number / 2
+
+	while divisor <= number and divisor <= factor_cap:
 		if index >= len( firstPrimes ):
 			divisor = getNextPrime( divisor )
 			firstPrimes.append( divisor )
