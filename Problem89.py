@@ -55,6 +55,5 @@ for line in f:
 
 	if len(these_numerals) > len(new_numerals):
 		total += len(these_numerals) - len(new_numerals)
-		print number, new_numerals
 
 print "\n\n", total
