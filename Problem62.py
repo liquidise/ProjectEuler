@@ -3,7 +3,8 @@ for i in range( 1, 10000 ):
 	cube = str(i ** 3)
 	if len( cube ) == 12:
 		cubes[ cube ] = set( list(cube) )
-
+	elif len( cube ) > 12:
+		break
 
 for cube in sorted(cubes.iterkeys()):
 	matches = [ cube ]
