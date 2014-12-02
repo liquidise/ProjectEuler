@@ -13,7 +13,7 @@ def num_ways( number, highest_currency ):
 		if i > number or i > highest_currency:
 			continue
 
-		ways += num_ways( number - i, i, False )
+		ways += num_ways( number - i, i )
 
 	cache[ key ] = ways
 	return ways
