@@ -1,34 +1,24 @@
-cache = { 0: 1, 1: 0, 2: 1 }
+cache = {}
 
-def num_ways( number, first ):
-	global cache
-	if number in cache:
-		return cache[ number ]
+def num_ways( number, highest_currency ):
+	if number == 1 or number == 0:
+		return 1
+
+	key = str(number) + "_" + str(highest_currency)
+	if key in cache:
+		return cache[ key ]
 
 	ways = 1
-	for i in currencies[ 100 - number + 1: ]:
-		if first:
-			print " ", number, "-", i, "=", number - i, "=>",
-		ways_for_x = num_ways( number - i, False )
-		if first:
-			print ways_for_x
-		if not (number - i) in cache:
-			cache[ number - i ] = ways_for_x
-		ways += ways_for_x
+	for i in currencies[ 0:-1 ]:
+		if i > number or i > highest_currency:
+			continue
 
+		ways += num_ways( number - i, i, False )
+
+	cache[ key ] = ways
 	return ways
 
-currencies = []
-for i in range( 0, 100 ):
-	currencies.append( 100 - i )
+currencies = range( 1, 100 )
+currencies.reverse()
 
-# for i in range( 1, 7 ):
-# 	print i
-# 	num_ways( i, True )
-
-
-value = 1
-for i in range( 1, 101 ):
-	value /= 1 - x ** i
-
-print value
+print num_ways( 100, 99 )
