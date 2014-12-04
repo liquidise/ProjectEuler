@@ -8,9 +8,11 @@ def num_ways( number, highest_prime ):
 	if number == 1 or number < 0:
 		return 0
 
-	key = str(number) + "_" + str(highest_prime)
-	if key in cache:
-		return cache[ key ]
+	if number in cache:
+		if highest_prime in cache[ number ]:
+			return cache[ number ][ highest_prime ]
+	else:
+		cache[ number ] = {}
 
 	ways = 0
 	for i in primes:
@@ -19,7 +21,7 @@ def num_ways( number, highest_prime ):
 
 		ways += num_ways( number - i, i )
 
-	cache[ key ] = ways
+	cache[ number ][ highest_prime ] = ways
 	return ways
 
 primes = number_theory.firstPrimes
@@ -29,3 +31,4 @@ for i in range( 1, 100 ):
 	sums = num_ways( i, primes[0] )
 	if sums > 5000:
 		print i, sums
+		exit()
