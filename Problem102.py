@@ -8,13 +8,16 @@ def originInTriange( point1, point2, point3 ):
 
 	return sign1 == sign2 and sign2 == sign3
 
-file = open( 'assets/triangle.txt' )
+file = open( 'assets/p102_triangles.txt' )
 
-point1 = { 'x': -340, 'y': 495 }
-point2 = { 'x': -153, 'y': -910 }
-point3 = { 'x': 835, 'y': -947 }
+contians = 0
+for line in file:
+	nums = line.split( "," )
+	p1 = {'x': int(nums[0]), 'y': int(nums[1]) }
+	p2 = {'x': int(nums[2]), 'y': int(nums[3]) }
+	p3 = {'x': int(nums[4]), 'y': int(nums[5]) }
 
-print originInTriange( point1, point2, point3 )
+	if originInTriange( p1, p2, p3 ):
+		contians += 1
 
-#for line in file:
-#	print line
+print contians
