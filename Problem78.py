@@ -1,21 +1,27 @@
 cache = {}
 
-def num_ways( number, highest_number ):
-	if number == 1 or number == 0:
+def num_ways( number ):
+	if number == 0:
 		return 1
+	elif number < 0:
+		return 0
 
-	key = str(number) + "_" + str(highest_number)
-	if key in cache:
-		return cache[ key ]
+	if number in cache:
+		return cache[ number ]
 
 	ways = 0
-	for i in numbers:
-		if i > number or i > highest_number:
+	i = -1 - number
+	while i < number:
+		i += 1
+
+		if i == 0:
 			continue
+		elif i % 2 == 0:
+			ways -= num_ways( number - ((i * (3 * i - 1)) / 2) )
+		else:
+			ways += num_ways( number - ((i * (3 * i - 1)) / 2) )
 
-		ways += num_ways( number - i, i )
-
-	cache[ key ] = ways
+	cache[ number ] = ways
 	return ways
 
 MAX = 1000
