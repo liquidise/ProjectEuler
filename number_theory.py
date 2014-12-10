@@ -72,12 +72,15 @@ def totient( number ):
 	return product
 
 def gcd( a, b ):
-	while a != b:
-		if a > b:
-			a -= b
-		else:
-			b -= a
+	while b > 0:
+		a, b = b, a % b
 	return a
+
+
+
+
+def share_factors( num1, num2 ):
+	return len( set(factor(num1)) & set(factor(num2)) ) > 0
 
 def exp_factor( number ):
 	index = 0
@@ -111,13 +114,20 @@ def exp_factor( number ):
 
 	return array
 
-
+factor_cache = {}
 def factor( number ):
+	global factor_cache
+
+	original_number = number
 	index = 0
 	divisor = 2
 	factors = []
 
+	if original_number in factor_cache:
+		return factor_cache[ original_number ]
+
 	if isPrime( number ):
+		factor_cache[ number ] = [ number ]
 		return [ number ]
 
 	while divisor <= number:
@@ -133,4 +143,5 @@ def factor( number ):
 		else:
 			index += 1
 
+	factor_cache[ original_number ] = factors
 	return factors

@@ -1,14 +1,13 @@
-import sys
+prev_denominator = 1
+denominator = 2
 
-sys.setrecursionlimit( 1200 )
-
-def next_frac( iteration ):
-	if iteration == 0:
-		return .5
-	else:
-		return 1 / (2 + next_frac( iteration - 1 ) )
-
+count = 0
 for i in range( 1, 1000 ):
-	print 1 + next_frac( i )
+	temp = denominator
+	denominator = (2 * denominator) + prev_denominator
+	prev_denominator = temp
 
+	if int( str(denominator)[0:3] ) >= 707:
+		count += 1
 
+print count
